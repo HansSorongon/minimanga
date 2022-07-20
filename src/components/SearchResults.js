@@ -1,14 +1,28 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { FlatList, Text, Container, HStack,
-        VStack, Flex, Box, useColorModeValue, Image } from 'native-base'
+        VStack, Flex, Box, useColorModeValue, Image, Input } from 'native-base'
 
 const SearchResults = (props) => {
+    const [ inputVal, setInputVal ] = useState('')
     const [ linkStates, setLinkStates ] = useState()
+    const [ mangaList, setMangaList ] = useState({})
 
     const boxBackground = useColorModeValue('gray.200', 'gray.800')
 
-    const { mangaList, active } = props
+    const handleSubmit = () => {
+        setMangaList({})
+        console.log('Attempting to fetch...')
+        const titleQuery = inputVal.trim().split(' ').join('+')
+        console.log(`Fetching queries for ${titleQuery}...`)
+        axios.get(`https://api.mangadex.org/manga?title=${inputVal}&includes[]=cover_art`).then(
+            (response) => {
+                const lst = response.data.data
+                setMangaList(lst)
+            }
+        )
+    }
 
     const mangas = Object.keys(mangaList).map((key) => {
         const id = mangaList[key].id
@@ -23,11 +37,9 @@ const SearchResults = (props) => {
         return [{
             title: mangaList[key].attributes.title.en,
             description: mangaList[key].attributes.description.en,
-            coverLink: link
+            coverLink: link,
         }][0]
     })
-
-    return mangas
 
     return (
         <Box>
@@ -37,11 +49,14 @@ const SearchResults = (props) => {
                 mt={2}
                 bg={useColorModeValue('muted.300', 'gray.800')}
                 placeholder='Search...'
+                onChangeText={(value) => setInputVal(value)}
+                onSubmitEditing={handleSubmit}
                 value={inputVal}
             />
+            <Box pb={2} borderBottomWidth={2} borderBottomColor={useColorModeValue('gray.300', 'gray.800')} />
             <FlatList
                 style={{height: '100%'}}
-                data={item}
+                data={mangas}
                 renderItem={({item}) => {
                     return (
                         <TouchableOpacity onPress={() => console.log('test')}>
@@ -52,11 +67,10 @@ const SearchResults = (props) => {
                                 </VStack>
                                 <Image
                                     rounded={15}
-                                    alt='pic'
-                                    source={{uri: item.coverLink }}
-                                    fallbackSource={{uri: '../assets/icon.png'}}
+                                    source={{uri: item.coverLink + '?t=' + Math.round(new Date().getTime() / 1000)}}
                                     width='25%'
                                     height='100%'
+                                    alt='image'
                                 />
                             </HStack>
                         </TouchableOpacity>
