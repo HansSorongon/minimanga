@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { ScrollView } from 'react-native'
 import { useState } from 'react'
 import { Flex,
@@ -11,11 +12,15 @@ import { Flex,
 
 import SearchResults from '../components/SearchResults'
 
+// api
+const baseUrl = 'api.mangadex.org'
+
 const HomeScreen = () => {
     const [inputVal, setInputVal] = useState('')
 
     const handleSubmit = () => {
-        console.log(inputVal)
+        const titleQuery = inputVal.trim().split(' ').join('+')
+        axios.get(`https://api.mangadex.org/manga?title=${inputVal}`).then((response) => console.log(response.data.data[0].attributes.description.en))
     }
 
     return (
