@@ -17,10 +17,17 @@ const baseUrl = 'api.mangadex.org'
 
 const HomeScreen = () => {
     const [inputVal, setInputVal] = useState('')
+    const [mangaList, setMangaList] = useState({})
 
     const handleSubmit = () => {
         const titleQuery = inputVal.trim().split(' ').join('+')
-        axios.get(`https://api.mangadex.org/manga?title=${inputVal}`).then((response) => console.log(response.data.data[0].attributes.description.en))
+        axios.get(`https://api.mangadex.org/manga?title=${inputVal}&includes[]=cover_art`).then(
+            (response) => {
+                console.log('Fetching...')
+                const lst = response.data.data
+                setMangaList(lst)
+            }
+        )
     }
 
     return (
@@ -40,7 +47,7 @@ const HomeScreen = () => {
                     onSubmitEditing={handleSubmit}
                 />
             </Box>
-            <SearchResults />
+            <SearchResults mangaList={mangaList}/>
         </Flex>
     )
 }
