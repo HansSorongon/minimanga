@@ -8,6 +8,7 @@ const SearchResults = (props) => {
     const [ inputVal, setInputVal ] = useState('')
     const [ linkStates, setLinkStates ] = useState()
     const [ mangaList, setMangaList ] = useState({})
+    const [ noManga, setNoManga ] = useState(false)
 
     const boxBackground = useColorModeValue('gray.200', 'gray.800')
 
@@ -20,6 +21,11 @@ const SearchResults = (props) => {
             (response) => {
                 const lst = response.data.data
                 setMangaList(lst)
+                if (!mangaList || inputVal=='') {
+                    setNoManga(true)
+                } else {
+                    setNoManga(false)
+                }
             }
         )
     }
@@ -42,7 +48,7 @@ const SearchResults = (props) => {
     })
 
     return (
-        <Box>
+        <Box style={{flex: 1}} pb={5}>
             <Input
                 rounded={20}
                 p={4}
@@ -54,30 +60,36 @@ const SearchResults = (props) => {
                 value={inputVal}
             />
             <Box pb={2} borderBottomWidth={2} borderBottomColor={useColorModeValue('gray.300', 'gray.800')} />
-            <FlatList
-                style={{height: '100%'}}
-                data={mangas}
-                renderItem={({item}) => {
-                    return (
-                        <TouchableOpacity onPress={() => console.log('test')}>
-                            <HStack h={140} rounded={10} mt={5} p={15} w='100%' bg={boxBackground} justifyContent='space-between'>
-                                <VStack w='70%'>
-                                    <Text fontSize='18px' fontWeight='bold' noOfLines={2}>{item.title}</Text>
-                                    <Text noOfLines={3} isTruncated>{item.description}</Text>
-                                </VStack>
-                                <Image
-                                    rounded={15}
-                                    source={{uri: item.coverLink + '?t=' + Math.round(new Date().getTime() / 1000)}}
-                                    width='25%'
-                                    height='100%'
-                                    alt='image'
-                                />
-                            </HStack>
-                        </TouchableOpacity>
-                    )
-                }}
-            >
-            </FlatList>
+            {
+                !noManga?
+                <FlatList
+                    style={{height: '100%'}}
+                    data={mangas}
+                    renderItem={({item}) => {
+                        return (
+                            <TouchableOpacity onPress={() => console.log('test')}>
+                                <HStack h={140} rounded={10} mt={5} p={15} w='100%' bg={boxBackground} justifyContent='space-between'>
+                                    <VStack w='70%'>
+                                        <Text fontSize='18px' fontWeight='bold' noOfLines={2}>{item.title}</Text>
+                                        <Text noOfLines={3} isTruncated>{item.description}</Text>
+                                    </VStack>
+                                    <Image
+                                        rounded={15}
+                                        source={{uri: item.coverLink + '?t=' + Math.round(new Date().getTime() / 1000)}}
+                                        width='25%'
+                                        height='100%'
+                                        alt='image'
+                                    />
+                                </HStack>
+                            </TouchableOpacity>
+                        )
+                    }}
+                >
+                </FlatList>
+                :
+                <Text alignSelf='center' mt='50%' color='gray.400' fontSize='20px'>Search something to begin!</Text>
+            }
+
         </Box>
     )
 }
