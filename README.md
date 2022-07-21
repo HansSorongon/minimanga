@@ -23,4 +23,4 @@ For now minimanga only supports online mode.
 This project is built on top of the [Mangadex](https://www.mangadex.org) API,
 all credit for manga panels, manga lists, chapter lists go to them and the scanlation groups.
 This is a personal project. I do not intend to use this for any sort of personal income. I'm doing
-this for fun!
+this for fun! Do not attempt to use this project for anything commercial.
