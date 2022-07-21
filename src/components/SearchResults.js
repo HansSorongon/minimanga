@@ -30,7 +30,7 @@ const SearchResults = (props) => {
                     setNoManga(false)
                 }
             }
-        )
+        ).catch(err => console.log(err))
     }
 
     const mangas = Object.keys(mangaList).map((key) => {

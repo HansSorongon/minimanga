@@ -9,6 +9,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 // screens
 import HomeScreen from './src/screens/HomeScreen'
 import MangaDetails from './src/screens/MangaDetails'
+import MangaPage from './src/screens/MangaPage'
 
 //components
 import ThemeToggle from './src/components/ThemeToggle'
@@ -37,9 +38,10 @@ const App = () => {
     return (
         <NativeBaseProvider>
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName='Home'>
                     <Stack.Screen name='Home' component={HomeScreen} options={headerOptions} />
                     <Stack.Screen name='MangaDetails' component={MangaDetails} options={headerOptions} />
+                    <Stack.Screen name='MangaPage' component={MangaPage} options={headerOptions} />
                 </Stack.Navigator>
             </NavigationContainer>
         </NativeBaseProvider>

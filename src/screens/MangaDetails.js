@@ -41,7 +41,7 @@ const MangaDetails = ({ route, navigation }) => {
 
                 setChapters(u)
             }
-        )
+        ).catch(err => console.log(err))
     }
 
     useEffect(() => {
