@@ -1,10 +1,13 @@
 import axios from 'axios'
+import { useNavigation } from '@react-navigation/native'
 import { useState, useEffect } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { FlatList, Text, Container, HStack,
+import { TouchableOpacity, FlatList } from 'react-native'
+import { Text, Container, HStack,
         VStack, Flex, Box, useColorModeValue, Image, Input } from 'native-base'
 
 const SearchResults = (props) => {
+    const navigation = useNavigation()
+
     const [ inputVal, setInputVal ] = useState('')
     const [ linkStates, setLinkStates ] = useState()
     const [ mangaList, setMangaList ] = useState({})
@@ -44,6 +47,7 @@ const SearchResults = (props) => {
             title: mangaList[key].attributes.title.en,
             description: mangaList[key].attributes.description.en,
             coverLink: link,
+            id: id,
         }][0]
     })
 
@@ -56,8 +60,8 @@ const SearchResults = (props) => {
                 bg={useColorModeValue('muted.300', 'gray.800')}
                 placeholder='Search...'
                 onChangeText={(value) => setInputVal(value)}
-                onSubmitEditing={handleSubmit}
                 value={inputVal}
+                onSubmitEditing={handleSubmit}
             />
             <Box pb={2} borderBottomWidth={2} borderBottomColor={useColorModeValue('gray.300', 'gray.800')} />
             {
@@ -67,7 +71,10 @@ const SearchResults = (props) => {
                     data={mangas}
                     renderItem={({item}) => {
                         return (
-                            <TouchableOpacity onPress={() => console.log('test')}>
+                            <TouchableOpacity onPress={() => {
+                                navigation.navigate('MangaDetails',
+                                {coverLink: item.coverLink, title: item.title, description: item.description, id: item.id})
+                            }}>
                                 <HStack h={140} rounded={10} mt={5} p={15} w='100%' bg={boxBackground} justifyContent='space-between'>
                                     <VStack w='70%'>
                                         <Text fontSize='18px' fontWeight='bold' noOfLines={2}>{item.title}</Text>
@@ -89,7 +96,6 @@ const SearchResults = (props) => {
                 :
                 <Text alignSelf='center' mt='50%' color='gray.400' fontSize='20px'>Search something to begin!</Text>
             }
-
         </Box>
     )
 }

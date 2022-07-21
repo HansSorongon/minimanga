@@ -8,10 +8,10 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 
 // screens
 import HomeScreen from './src/screens/HomeScreen'
+import MangaDetails from './src/screens/MangaDetails'
 
 //components
 import ThemeToggle from './src/components/ThemeToggle'
-
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +39,7 @@ const App = () => {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name='Home' component={HomeScreen} options={headerOptions} />
+                    <Stack.Screen name='MangaDetails' component={MangaDetails} options={headerOptions} />
                 </Stack.Navigator>
             </NavigationContainer>
         </NativeBaseProvider>
