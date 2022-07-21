@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { TouchableOpacity } from 'react-native'
-import { Box, Text, ScrollView, FlatList, Container, useColorModeValue } from 'native-base'
+import { Box, Text, ScrollView, FlatList, Container, useColorModeValue, Spinner } from 'native-base'
 
 const ChapterList = ({data}) => {
     const containerColor = useColorModeValue('muted.200', 'muted.700')
@@ -24,7 +24,8 @@ const ChapterList = ({data}) => {
             showsVerticalScrollIndicator={false}
             >
             </FlatList> :
-        ''}
+            ''
+        }
         </Box>
     )
 }

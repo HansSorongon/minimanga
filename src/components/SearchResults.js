@@ -65,7 +65,7 @@ const SearchResults = (props) => {
             />
             <Box pb={2} borderBottomWidth={2} borderBottomColor={useColorModeValue('gray.300', 'gray.800')} />
             {
-                !noManga?
+                !noManga ?
                 <FlatList
                     style={{height: '100%'}}
                     data={mangas}
@@ -80,9 +80,10 @@ const SearchResults = (props) => {
                                         <Text fontSize='18px' fontWeight='bold' noOfLines={2}>{item.title}</Text>
                                         <Text noOfLines={3} isTruncated>{item.description}</Text>
                                     </VStack>
+
                                     <Image
                                         rounded={15}
-                                        source={{uri: item.coverLink + '?t=' + Math.round(new Date().getTime() / 1000)}}
+                                        source={{uri: item.coverLink}}
                                         width='25%'
                                         height='100%'
                                         alt='image'
@@ -93,8 +94,12 @@ const SearchResults = (props) => {
                     }}
                 >
                 </FlatList>
-                :
-                <Text alignSelf='center' mt='50%' color='gray.400' fontSize='20px'>Search something to begin!</Text>
+                : ''
+            }
+            {
+                noManga ?
+                    <Text alignSelf='center' mt='50%' color='gray.400' fontSize='20px'>Search something to begin!</Text>
+                : ''
             }
         </Box>
     )
