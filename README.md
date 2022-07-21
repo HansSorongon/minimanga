@@ -5,7 +5,6 @@ A minimalist manga reader built on top of the Mangadex API. </br>
 <img src="https://github.com/HansSorongon/minimanga/blob/master/assets/minimanga1.jpeg" style='height: 400px;'/>
 <img src="https://github.com/HansSorongon/minimanga/blob/master/assets/minimanga2.jpeg" style='height: 400px;'/>
 <img src="https://github.com/HansSorongon/minimanga/blob/master/assets/minimanga4.jpeg" style='height: 400px;'/>
-<img src="https://github.com/HansSorongon/minimanga/blob/master/assets/minimanga3.jpeg" style='height: 400px;'/>
 </div>
 
 ## Features
