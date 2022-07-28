@@ -1,6 +1,5 @@
-import React from "react";
-import { NativeBaseProvider,
-         useColorModeValue } from "native-base";
+import React from 'react'
+import { NativeBaseProvider, useColorModeValue } from 'native-base'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -17,8 +16,6 @@ import ThemeToggle from './src/components/ThemeToggle'
 const Stack = createNativeStackNavigator()
 
 const App = () => {
-
-
     const headerOptions = {
         title: 'Minimanga',
         headerTitleAlign: 'center',
@@ -29,19 +26,29 @@ const App = () => {
             fontWeight: 'bold',
             fontSize: '20px',
         },
-        headerRight: () => (
-            <ThemeToggle />
-        ),
+        headerRight: () => <ThemeToggle />,
         headerTintColor: '#fff',
     }
 
     return (
         <NativeBaseProvider>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName='Home'>
-                    <Stack.Screen name='Home' component={HomeScreen} options={headerOptions} />
-                    <Stack.Screen name='MangaDetails' component={MangaDetails} options={headerOptions} />
-                    <Stack.Screen name='MangaPage' component={MangaPage} options={headerOptions} />
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen
+                        name="Home"
+                        component={HomeScreen}
+                        options={headerOptions}
+                    />
+                    <Stack.Screen
+                        name="MangaDetails"
+                        component={MangaDetails}
+                        options={headerOptions}
+                    />
+                    <Stack.Screen
+                        name="MangaPage"
+                        component={MangaPage}
+                        options={headerOptions}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
         </NativeBaseProvider>
@@ -49,5 +56,3 @@ const App = () => {
 }
 
 export default App
-
-

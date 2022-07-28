@@ -6,7 +6,11 @@ const ThemeToggle = () => {
     const { colorMode, toggleColorMode } = useColorMode()
 
     return (
-        <Switch isChecked={colorMode=='light'} onToggle={toggleColorMode} size='sm'/>
+        <Switch
+            isChecked={colorMode == 'light'}
+            onToggle={toggleColorMode}
+            size="sm"
+        />
     )
 }
 
