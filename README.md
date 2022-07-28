@@ -13,7 +13,7 @@ A minimalist manga reader built on top of the Mangadex API. </br>
 
 -   Searching for manga
 -   Getting manga chapters
--   Chapter descriptions (wip ;-;)
+-   Manga descriptions (wip ;-;)
 -   Dark mode! Read before you go to bed!
 -   Reading manga! <br/>
 
