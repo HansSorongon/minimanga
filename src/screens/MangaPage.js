@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import {
     Box,
-    Text,
     ScrollView,
     Image,
-    Button,
     useColorModeValue,
+    Container,
 } from 'native-base'
 
-const MangaPage = ({ route, navigation }) => {
+const MangaPage = ({ route }) => {
     const chapter = route.params
     const [pageUrls, setPageUrls] = useState([])
     const [fileNames, setFileNames] = useState([])
@@ -54,9 +53,8 @@ const MangaPage = ({ route, navigation }) => {
                                   source={{ uri: url }}
                                   key={url}
                                   alt="test"
-                                  height="600px"
+                                  height="860px"
                                   mt={2}
-                                  style={{ flex: 1, aspectRatio: 1 }}
                               />
                           )
                       })

@@ -1,10 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { TouchableOpacity } from 'react-native'
 import {
     Text,
     Image,
-    Flex,
     HStack,
     VStack,
     useColorModeValue,
@@ -13,14 +11,11 @@ import {
 
 import ChapterList from '../components/ChapterList'
 
-const MangaDetails = ({ route, navigation }) => {
+const MangaDetails = ({ route }) => {
     const [chapters, setChapters] = useState({})
     const [chapElements, setChapElements] = useState({})
 
-    const test = [{ test: '1' }]
-
     const manga = route.params
-    const boxBackground = useColorModeValue('gray.200', 'gray.800')
 
     const fetchChapters = () => {
         axios
